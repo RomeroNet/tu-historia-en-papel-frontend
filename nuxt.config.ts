@@ -6,5 +6,10 @@ export default defineNuxtConfig({
   },
   css: [
       'normalize.css/normalize.css',
+      '@fontsource/nunito-sans/600.css',
+      '@fontsource/nunito-sans/700.css',
+      '@fontsource/caveat/400.css',
+
+      '~/assets/css/main.css',
   ]
 })

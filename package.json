@@ -10,6 +10,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@fontsource/caveat": "^5.2.8",
+    "@fontsource/nunito-sans": "^5.2.7",
     "normalize.css": "^8.0.1",
     "nuxt": "^4.4.2",
     "vue": "^3.5.33",
