@@ -1,16 +1,16 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: { { .Values.name } }-http
+  name: {{ .Values.name }}-http
   labels:
-    app: { { .Values.name } }
+    app: {{ .Values.name }}
 spec:
   parentRefs:
-    - name: { { .Values.name } }
+    - name: {{ .Values.name }}
       sectionName: http
 
   hostnames:
-    - { { .Values.gateway.hostname | quote } }
+    - {{ .Values.gateway.hostname | quote }}
 
   rules:
     - filters:
