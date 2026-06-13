@@ -1,0 +1,11 @@
+:root {
+  --brand-pink: 237 95 135;
+}
+
+a:visited {
+  color: inherit;
+}
+
+a:active {
+  color: inherit
+}
