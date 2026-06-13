@@ -8,9 +8,6 @@ image:
   tag: latest
   pullPolicy: Always
 
-imagePullSecrets:
-  - name: ghcr-pull-secret
-
 service:
   port: 8080
 
