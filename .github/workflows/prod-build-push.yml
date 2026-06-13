@@ -19,7 +19,6 @@ env:
   USER: romeronet
   REPOSITORY: tu-historia-en-papel-frontend
   NAMESPACE: tu-historia-en-papel
-  IMAGE_PULL_SECRET: ghcr-pull-secret
 
 jobs:
   build-node:
@@ -73,18 +72,6 @@ jobs:
 
       - name: Create namespace
         run: kubectl create namespace "${{ env.NAMESPACE }}" --dry-run=client -o yaml | kubectl apply -f -
-
-      - name: Configure GHCR pull secret
-        env:
-          GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
-          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
-        run: |
-          kubectl create secret docker-registry "${{ env.IMAGE_PULL_SECRET }}" \
-            --namespace "${{ env.NAMESPACE }}" \
-            --docker-server "${{ env.REGISTRY }}" \
-            --docker-username "$GHCR_USERNAME" \
-            --docker-password "$GHCR_TOKEN" \
-            --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Deploy to Kubernetes
         run: |

@@ -8,14 +8,12 @@ image:
   tag: latest
   pullPolicy: Always
 
-imagePullSecrets:
-  - name: ghcr-pull-secret
-
 service:
   port: 8080
 
 gateway:
   className: traefik
+  controllerName: traefik.io/gateway-controller
   hostname: tuhistoriaenpapel.com
   clusterIssuer: letsencrypt-prod
   tlsSecretName: app-tls
