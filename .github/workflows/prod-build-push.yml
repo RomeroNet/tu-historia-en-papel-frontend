@@ -21,8 +21,33 @@ env:
   NAMESPACE: tu-historia-en-papel
 
 jobs:
-  build-node:
+  validate:
+    name: Validate Helm chart
     runs-on: ubuntu-24.04-arm
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Set up helm
+        uses: azure/setup-helm@v5.0.0
+
+      - name: Validate Helm charts
+        run: |
+          helm lint --strict helm
+          helm template tu-historia-en-papel-frontend helm \
+            --set-string deploymentSha="${{ github.sha }}" > /tmp/application.yaml
+          kubectl create --dry-run=client --validate=false -f /tmp/application.yaml
+          kubectl create --dry-run=client --validate=false -f infrastructure/gatewayclass.yaml
+
+  build-node:
+    name: Build project
+    runs-on: ubuntu-24.04-arm
+    needs:
+      - validate
 
     steps:
       - name: Checkout code
@@ -48,6 +73,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.REPOSITORY }}/node:latest
 
   deploy:
+    name: Deploy project on Kubernetes
     runs-on: ubuntu-24.04-arm
     needs:
       - build-node
@@ -81,11 +107,3 @@ jobs:
             --set-string deploymentSha="${{ github.sha }}" \
             --wait \
             --timeout 5m
-
-      - name: Delete old untagged images
-        uses: actions/delete-package-versions@v5
-        with:
-          package-name: ${{ env.REPOSITORY }}/node
-          package-type: container
-          min-versions-to-keep: 0
-          delete-only-untagged-versions: true
