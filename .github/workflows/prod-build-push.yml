@@ -63,6 +63,8 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.REPOSITORY }}/node:latest
+          cache-from: type=gha,scope=production-arm64
+          cache-to: type=gha,mode=max,scope=production-arm64
 
   deploy:
     name: Deploy project on Kubernetes
