@@ -16,6 +16,7 @@ service:
 
 gateway:
   className: traefik
+  controllerName: traefik.io/gateway-controller
   hostname: tuhistoriaenpapel.com
   clusterIssuer: letsencrypt-prod
   tlsSecretName: app-tls
