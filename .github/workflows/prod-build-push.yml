@@ -29,19 +29,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v4
-
       - name: Set up helm
         uses: azure/setup-helm@v5.0.0
 
       - name: Validate Helm charts
-        run: |
-          helm lint --strict helm
-          helm template tu-historia-en-papel-frontend helm \
-            --set-string deploymentSha="${{ github.sha }}" > /tmp/application.yaml
-          kubectl create --dry-run=client --validate=false -f /tmp/application.yaml
-          kubectl create --dry-run=client --validate=false -f infrastructure/gatewayclass.yaml
+        run: helm lint --strict helm
 
   build-node:
     name: Build project
@@ -98,6 +90,12 @@ jobs:
 
       - name: Create namespace
         run: kubectl create namespace "${{ env.NAMESPACE }}" --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: Validate Kubernetes resources
+        run: |
+          helm template tu-historia-en-papel-frontend helm \
+            --set-string deploymentSha="${{ github.sha }}" > /tmp/application.yaml
+          kubectl apply --server-side --dry-run=server --force-conflicts -f /tmp/application.yaml
 
       - name: Deploy to Kubernetes
         run: |
