@@ -3,29 +3,31 @@
 </script>
 
 <template>
-  <NuxtLink to="/" class="logo" aria-label="Tu Historia Creativa">
-    <span class="logo__title handwritten">Tu Historia Creativa</span>
-    <span class="logo__subtitle subtitle">DISEÑO · ILUSTRACION</span>
-  </NuxtLink>
+    <NuxtLink to="/" class="brand-logo" aria-label="Tu Historia Creativa">
+        <span class="brand-logo__title font-handwritten">Tu Historia Creativa</span>
+        <span class="brand-logo__subtitle font-subtitle">DISEÑO · ILUSTRACION</span>
+    </NuxtLink>
 </template>
 
-<style scoped>
-.logo {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-}
+<style lang="scss" scoped>
+@use "~/assets/scss/vars.scss";
 
-.logo__title {
-  color: black;
-  display: inline-flex;
-  font-size: 2.5rem;
-}
+.brand-logo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
 
-.logo__subtitle {
-  font-size: 1rem;
-  font-weight: 700;
-  color: rgb(var(--brand-pink))
+    &__title {
+        color: black;
+        display: inline-flex;
+        font-size: 2.5rem;
+    }
+
+    &__subtitle {
+        color: vars.$brand-pink;
+        font-size: 1rem;
+        font-weight: 700;
+    }
 }
 </style>

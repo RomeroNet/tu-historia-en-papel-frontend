@@ -8,6 +8,6 @@ import HeroBanner from "~/components/Home/HeroBanner.vue";
     <p>Hello!</p>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
