@@ -16,9 +16,12 @@
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use "~/assets/scss/vars.scss";
+
 .hero__container {
     --font-size: 1.8em;
+    --handwritten-extra-size: 7em;
     background-image: url("~/assets/images/hero_banner_desktop.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,17 +41,39 @@
     }
 
     .handwritten {
-        font-size: calc(var(--font-size) + 7em);
+        font-size: calc(var(--font-size) + var(--handwritten-extra-size));
     }
 
     .pink {
         color: rgb(var(--brand-pink));
         font-size: var(--font-size);
-        font-weight: 800;
+        font-weight: 700;
     }
 
     .hero__subtitle {
         width: 50%;
+    }
+}
+
+@media (max-width: vars.$mobile-width) {
+    .hero__container {
+        --font-size: 1.2em;
+        --handwritten-extra-size: 3.5em;
+        padding: 7.5vh 0;
+
+        div {
+            margin-right: 0;
+
+            > .hero__subtitle {
+                margin: 0 auto;
+                width: 80%;
+                text-align: center;
+            }
+        }
+
+        > div > div {
+            text-align: center;
+        }
     }
 }
 
