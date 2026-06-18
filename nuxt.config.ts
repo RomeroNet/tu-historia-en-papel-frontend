@@ -10,6 +10,6 @@ export default defineNuxtConfig({
       '@fontsource/nunito-sans/700.css',
       '@fontsource/caveat/400.css',
 
-      '~/assets/css/main.css',
+      '~/assets/scss/main.scss',
   ]
 })

@@ -1,0 +1,21 @@
+$font-family-handwritten: 'Caveat', cursive, system-ui;
+$font-family-subtitle: 'Nunito Sans', system-ui, sans-serif;
+
+a {
+    &:visited,
+    &:active {
+        color: inherit;
+    }
+}
+
+.font-handwritten {
+    font-family: $font-family-handwritten;
+}
+
+.font-subtitle {
+    font-family: $font-family-subtitle;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
