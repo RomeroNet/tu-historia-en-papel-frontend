@@ -1,9 +1,11 @@
 <script setup lang="ts">
 
+import HeroBanner from "~/components/Home/HeroBanner.vue";
 </script>
 
 <template>
-  <p>Hello!</p>
+    <HeroBanner/>
+    <p>Hello!</p>
 </template>
 
 <style scoped>

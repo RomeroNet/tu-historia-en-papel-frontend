@@ -9,3 +9,15 @@ a:visited {
 a:active {
   color: inherit
 }
+
+.handwritten {
+    font-family: 'Caveat', cursive, system-ui;
+}
+
+.subtitle {
+    font-family: 'Nunito Sans', system-ui, sans-serif;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
