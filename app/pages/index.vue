@@ -1,11 +1,12 @@
 <script setup lang="ts">
 
 import HeroBanner from "~/components/Home/HeroBanner.vue";
+import Portfolio from "~/components/Home/Portfolio/Portfolio.vue";
 </script>
 
 <template>
     <HeroBanner/>
-    <p>Hello!</p>
+    <Portfolio/>
 </template>
 
 <style lang="scss" scoped>
