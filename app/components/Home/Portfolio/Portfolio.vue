@@ -11,16 +11,19 @@ import PortfolioImage from "~/components/Home/Portfolio/PortfolioImage.vue";
             image="birthday"
             title="Invitaciones"
             description="Diseños personalizados para cada ocasión especial"
+            destination="birthday"
         />
         <PortfolioImage
             image="business"
             title="Carteles publicitarios"
             description="Impacta y comunica tu mensaje con diseños creativos"
+            destination="business"
         />
         <PortfolioImage
             image="restaurant"
             title="Restaurantes"
             description="Diseño de menús, pizarras, branding y más para tu negocio"
+            destination="restaurant"
         />
     </div>
 </template>
@@ -45,6 +48,20 @@ import PortfolioImage from "~/components/Home/Portfolio/PortfolioImage.vue";
             display: flex;
             align-items: stretch;
             gap: 12.5vw;
+        }
+    }
+
+    @media (max-width: vars.$mobile-width) {
+        span {
+            max-width: 80%;
+            margin: 0 auto 2.5vh;
+        }
+
+        .portfolio {
+            &__container {
+                flex-direction: column;
+                gap: inherit;
+            }
         }
     }
 </style>

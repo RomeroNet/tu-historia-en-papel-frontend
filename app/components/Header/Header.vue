@@ -1,28 +1,27 @@
 <script setup lang="ts">
 
 import Logo from "~/components/Header/Logo.vue";
-import HeaderSocials from "~/components/Header/HeaderSocials.vue";
 </script>
 
 <template>
     <header class="site-header">
         <Logo class="site-header__logo"/>
 
-        <nav class="site-header__nav" aria-label="Navegacion principal">
-            <ul class="site-header__nav-list">
-                <li class="site-header__nav-item">
-                    <NuxtLink to="/" class="site-header__nav-link">Inicio</NuxtLink>
-                </li>
-                <li class="site-header__nav-item">
-                    <NuxtLink to="/contact" class="site-header__nav-link">Sobre mí</NuxtLink>
-                </li>
-                <li class="site-header__nav-item">Servicios</li>
-                <li class="site-header__nav-item">Plantillas</li>
-                <li class="site-header__nav-item">Contacto</li>
-            </ul>
-        </nav>
+<!--        <nav class="site-header__nav" aria-label="Navegacion principal">-->
+<!--            <ul class="site-header__nav-list">-->
+<!--                <li class="site-header__nav-item">-->
+<!--                    <NuxtLink to="/" class="site-header__nav-link">Inicio</NuxtLink>-->
+<!--                </li>-->
+<!--                <li class="site-header__nav-item">-->
+<!--                    <NuxtLink to="/contact" class="site-header__nav-link">Sobre mí</NuxtLink>-->
+<!--                </li>-->
+<!--                <li class="site-header__nav-item">Servicios</li>-->
+<!--                <li class="site-header__nav-item">Plantillas</li>-->
+<!--                <li class="site-header__nav-item">Contacto</li>-->
+<!--            </ul>-->
+<!--        </nav>-->
 
-        <HeaderSocials class="site-header__socials"/>
+<!--        <HeaderSocials class="site-header__socials"/>-->
     </header>
 </template>
 
@@ -33,6 +32,7 @@ import HeaderSocials from "~/components/Header/HeaderSocials.vue";
     $side-column-width: 20vw;
 
     display: flex;
+    min-height: 12.5vh;
     align-items: center;
     background: white;
 
