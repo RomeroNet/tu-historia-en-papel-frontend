@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     ],
 
     routeRules: {
-        '/': { prerender: true }
+        '/': { prerender: true },
+        '/portfolio/birthday': { prerender: true }
     }
 })
