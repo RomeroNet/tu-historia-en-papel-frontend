@@ -22,5 +22,8 @@ resources:
 gateway:
   className: traefik
   hostname: tuhistoriaenpapel.com
+  hostnames:
+    - tuhistoriaenpapel.com
+    - creahistoriastudio.com
   clusterIssuer: letsencrypt-prod
   tlsSecretName: app-tls
