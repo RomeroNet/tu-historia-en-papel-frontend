@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Footer from "../components/Footer/Footer.vue";
 import Header from "../components/Header/Header.vue";
 
 useHead({
@@ -19,6 +20,7 @@ useHead({
   <NuxtRouteAnnouncer />
   <Header />
   <slot />
+  <Footer />
 </template>
 
 <style lang="scss" scoped>

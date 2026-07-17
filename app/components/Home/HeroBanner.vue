@@ -22,6 +22,10 @@
                 <span class="hero-banner__name font-handwritten">A&amp;P</span>
                 <span class="hero-banner__label">Diseñadores e ilustradores</span>
             </div>
+
+            <span class="hero-banner__subtitle">
+                Nos encanta transformar ideas en diseños únicos y llenos de color.
+            </span>
         </div>
     </div>
 </template>
@@ -75,10 +79,15 @@
         color: vars.$brand-pink;
         font-size: var(--hero-banner-label-size);
         font-weight: 700;
+        text-transform: uppercase;
     }
 
     &__name {
         font-size: calc(var(--hero-banner-label-size) + var(--hero-banner-name-extra-size));
+    }
+
+    &__subtitle {
+        white-space: nowrap;
     }
 
     @media (max-width: vars.$mobile-width) {
@@ -92,6 +101,11 @@
             text-align: center;
         }
 
+        &__subtitle {
+            width: 80%;
+            margin: 0 auto;
+            white-space: normal;
+        }
     }
 }
 </style>
