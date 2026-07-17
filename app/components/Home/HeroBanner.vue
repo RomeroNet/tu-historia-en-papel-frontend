@@ -18,12 +18,10 @@
             />
         <div class="hero-banner__content">
             <div class="hero-banner__title">
-                <span class="hero-banner__label text-uppercase">¡Hola! Soy</span>
-                <span class="hero-banner__name font-handwritten">Patricia</span>
-                <span class="hero-banner__label text-uppercase">Diseñadora e ilustradora</span>
+                <span class="hero-banner__label">¡Hola! Somos</span>
+                <span class="hero-banner__name font-handwritten">A&amp;P</span>
+                <span class="hero-banner__label">Diseñadores e ilustradores</span>
             </div>
-
-            <span class="hero-banner__subtitle">Me encanta transformar ideas en diseños únicos y llenos de color.</span>
         </div>
     </div>
 </template>
@@ -83,10 +81,6 @@
         font-size: calc(var(--hero-banner-label-size) + var(--hero-banner-name-extra-size));
     }
 
-    &__subtitle {
-        width: 75%;
-    }
-
     @media (max-width: vars.$mobile-width) {
         --hero-banner-label-size: 1.2em;
         --hero-banner-name-extra-size: 3.5em;
@@ -98,10 +92,6 @@
             text-align: center;
         }
 
-        &__subtitle {
-            margin: 0 auto;
-            width: 80%;
-        }
     }
 }
 </style>

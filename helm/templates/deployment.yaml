@@ -24,6 +24,27 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
+          env:
+            - name: NUXT_SMTP_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.smtp.secretName }}
+                  key: NUXT_SMTP_HOST
+            - name: NUXT_SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.smtp.secretName }}
+                  key: NUXT_SMTP_USER
+            - name: NUXT_SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.smtp.secretName }}
+                  key: NUXT_SMTP_PASSWORD
+            - name: NUXT_SMTP_TO
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.smtp.secretName }}
+                  key: NUXT_SMTP_TO
           readinessProbe:
             httpGet:
               path: /

@@ -93,6 +93,21 @@ jobs:
       - name: Create namespace
         run: kubectl create namespace "${{ env.NAMESPACE }}" --dry-run=client -o yaml | kubectl apply -f -
 
+      - name: Configure SMTP secret
+        env:
+          NUXT_SMTP_HOST: ${{ secrets.NUXT_SMTP_HOST }}
+          NUXT_SMTP_USER: ${{ secrets.NUXT_SMTP_USER }}
+          NUXT_SMTP_PASSWORD: ${{ secrets.NUXT_SMTP_PASSWORD }}
+          NUXT_SMTP_TO: ${{ secrets.NUXT_SMTP_TO }}
+        run: |
+          kubectl create secret generic tu-historia-en-papel-frontend-smtp \
+            --namespace "${{ env.NAMESPACE }}" \
+            --from-literal=NUXT_SMTP_HOST="$NUXT_SMTP_HOST" \
+            --from-literal=NUXT_SMTP_USER="$NUXT_SMTP_USER" \
+            --from-literal=NUXT_SMTP_PASSWORD="$NUXT_SMTP_PASSWORD" \
+            --from-literal=NUXT_SMTP_TO="$NUXT_SMTP_TO" \
+            --dry-run=client -o yaml | kubectl apply -f -
+
       - name: Validate Kubernetes resources
         run: |
           helm template tu-historia-en-papel-frontend helm \

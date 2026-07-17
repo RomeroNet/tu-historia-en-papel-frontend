@@ -2,11 +2,11 @@
 import Header from "../components/Header/Header.vue";
 
 useHead({
-  title: "Tu Historia en Papel",
+  title: "CreaHistoria Studio",
   meta: [
     {
       name: "description",
-      content: "Tu Historia en Papel, diseños a medida."
+      content: "CreaHistoria Studio, diseño e ilustración a medida."
     },
   ],
   htmlAttrs: {
