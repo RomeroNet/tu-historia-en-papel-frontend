@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import InstagramLink from "~/components/InstagramLink.vue";
 import WhatsAppLink from "~/components/WhatsAppLink.vue";
 
 const currentYear = new Date().getFullYear();
@@ -8,7 +9,10 @@ const currentYear = new Date().getFullYear();
     <footer class="site-footer">
         <span>CreaHistoria Studio, {{ currentYear }}.</span>
         <span>Todos los derechos reservados.</span>
-        <WhatsAppLink class="site-footer__whatsapp" />
+        <div class="site-footer__social-links">
+            <WhatsAppLink />
+            <InstagramLink />
+        </div>
     </footer>
 </template>
 
@@ -30,7 +34,7 @@ const currentYear = new Date().getFullYear();
         }
     }
 
-    &__whatsapp {
+    &__social-links {
         display: none;
     }
 }
@@ -39,8 +43,11 @@ const currentYear = new Date().getFullYear();
     .site-footer {
         margin-top: 3vh;
 
-        &__whatsapp {
-            display: inline-flex;
+        &__social-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
             margin-top: 0.25rem;
         }
     }

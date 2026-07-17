@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+import InstagramLink from "~/components/InstagramLink.vue";
 import Logo from "~/components/Header/Logo.vue";
 import WhatsAppLink from "~/components/WhatsAppLink.vue";
 </script>
@@ -7,7 +8,10 @@ import WhatsAppLink from "~/components/WhatsAppLink.vue";
 <template>
     <header class="site-header">
         <Logo class="site-header__logo"/>
-        <WhatsAppLink class="site-header__whatsapp" />
+        <div class="site-header__social-links">
+            <WhatsAppLink />
+            <InstagramLink />
+        </div>
 
 <!--        <nav class="site-header__nav" aria-label="Navegacion principal">-->
 <!--            <ul class="site-header__nav-list">-->
@@ -46,7 +50,10 @@ import WhatsAppLink from "~/components/WhatsAppLink.vue";
         flex-basis: $side-column-width;
     }
 
-    &__whatsapp {
+    &__social-links {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
         margin-right: 5vw;
         margin-left: auto;
     }
@@ -82,7 +89,7 @@ import WhatsAppLink from "~/components/WhatsAppLink.vue";
             margin: 1.5vh 0;
         }
 
-        &__whatsapp {
+        &__social-links {
             display: none;
         }
 
