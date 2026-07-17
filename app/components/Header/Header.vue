@@ -1,11 +1,13 @@
 <script setup lang="ts">
 
 import Logo from "~/components/Header/Logo.vue";
+import WhatsAppLink from "~/components/WhatsAppLink.vue";
 </script>
 
 <template>
     <header class="site-header">
         <Logo class="site-header__logo"/>
+        <WhatsAppLink class="site-header__whatsapp" />
 
 <!--        <nav class="site-header__nav" aria-label="Navegacion principal">-->
 <!--            <ul class="site-header__nav-list">-->
@@ -44,6 +46,11 @@ import Logo from "~/components/Header/Logo.vue";
         flex-basis: $side-column-width;
     }
 
+    &__whatsapp {
+        margin-right: 5vw;
+        margin-left: auto;
+    }
+
     &__nav {
         flex-grow: 1;
     }
@@ -73,6 +80,10 @@ import Logo from "~/components/Header/Logo.vue";
         &__logo {
             flex-basis: 100%;
             margin: 1.5vh 0;
+        }
+
+        &__whatsapp {
+            display: none;
         }
 
         &__nav,
