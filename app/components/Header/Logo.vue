@@ -3,9 +3,9 @@
 </script>
 
 <template>
-    <NuxtLink to="/" class="brand-logo" aria-label="Tu Historia Creativa">
-        <span class="brand-logo__title font-handwritten">Tu Historia Creativa</span>
-        <span class="brand-logo__subtitle font-subtitle">DISEÑO · ILUSTRACION</span>
+    <NuxtLink to="/" class="brand-logo" aria-label="CreaHistoria Studio">
+        <span class="brand-logo__title font-handwritten">CreaHistoria Studio</span>
+        <span class="brand-logo__subtitle font-subtitle">DISEÑO · ILUSTRACIÓN</span>
     </NuxtLink>
 </template>
 

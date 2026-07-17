@@ -4,6 +4,9 @@
 .output
 .pnpm-store
 node_modules
+.env
+.env.*
+!.env.example
 
 .codex
 

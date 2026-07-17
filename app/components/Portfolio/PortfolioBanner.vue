@@ -1,21 +1,38 @@
 <script setup lang="ts">
-    defineProps(['image'])
+    defineProps({
+        image: {
+            type: String,
+            required: true
+        },
+        format: {
+            type: String,
+            default: 'jpg'
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        }
+    });
 </script>
 
 <template>
     <div class="portfolio-banner">
         <NuxtPicture
             class="portfolio-banner__image"
-            :src="`/images/portfolio/portfolio_${image}.jpg`"
+            :src="`/images/portfolio/portfolio_${image}.${format}`"
             format="avif,webp"
-            legacy-format="jpg"
+            :legacy-format="format"
             alt=""
             preload
             loading="eager"
             />
         <div class="portfolio-banner__content">
-            <h1 class="hero-banner__label text-uppercase">Invitaciones</h1>
-            <span class="hero-banner__label">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla tincidunt aliquam. Aenean hendrerit tempor dolor, in blandit ligula molestie vitae.</span>
+            <h1 class="text-uppercase">{{ title }}</h1>
+            <span>{{ description }}</span>
         </div>
     </div>
 </template>
@@ -30,6 +47,20 @@
     height: 45vh;
     overflow: hidden;
     align-items: center;
+
+    &::after {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        content: '';
+        background: linear-gradient(
+            90deg,
+            rgb(0 0 0 / 75%),
+            rgb(0 0 0 / 50%),
+            rgb(0 0 0 / 15%)
+        );
+        pointer-events: none;
+    }
 
     &__image {
         position: absolute;
@@ -48,7 +79,7 @@
 
     &__content {
         position: relative;
-        z-index: 1;
+        z-index: 2;
         margin: 0 auto;
         padding-left: 6em;
         width: calc(50% - 12em);
@@ -60,6 +91,7 @@
 
         span {
             color: white;
+            text-shadow: 0 1px 3px rgb(0 0 0 / 80%);
         }
     }
 }
@@ -67,6 +99,10 @@
 @media (max-width: vars.$mobile-width) {
     .portfolio-banner {
         height: calc(65vh - 20px);
+
+        &::after {
+            background: rgb(0 0 0 / 58%);
+        }
 
         &__image {
             :deep(img) {

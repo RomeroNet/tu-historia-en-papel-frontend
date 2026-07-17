@@ -1,19 +1,37 @@
 <script setup lang="ts">
-    defineProps(['image', 'title', 'description', 'destination'])
+    defineProps({
+        image: String,
+        format: {
+            type: String,
+            default: 'jpg'
+        },
+        title: String,
+        description: String,
+        destination: String
+    });
+
+
 </script>
 
 <template>
     <h3>{{ title }}</h3>
     <div class="portfolio__card">
-        <NuxtPicture
-            class="portfolio__card__image"
-            :src="`/images/portfolio/portfolio_${image}.jpg`"
-            format="avif,webp"
-            legacy-format="png"
-            alt=""
-            preload
-            loading="eager"
+        <div class="portfolio__card__media">
+            <div
+                class="portfolio__card__background"
+                :style="{ backgroundImage: `url(/images/portfolio/portfolio_${image}.${format})` }"
+                aria-hidden="true"
             />
+            <NuxtPicture
+                class="portfolio__card__image"
+                :src="`/images/portfolio/portfolio_${image}.${format}`"
+                format="avif,webp"
+                legacy-format="png"
+                alt=""
+                preload
+                loading="eager"
+            />
+        </div>
         <div class="portfolio__card__content">
             <h3>{{ title }}</h3>
             <span>{{ description }}</span>
@@ -43,24 +61,37 @@
         align-items: center;
         min-width: 0;
 
-        &:first-of-type {
-            margin-left: 12.5vw;
+        &__media {
+            position: relative;
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            margin: auto 0;
+            overflow: hidden;
+            background-color: rgb(245 245 245);
         }
 
-        &:last-of-type {
-            margin-right: 12.5vw;
+        &__background {
+            position: absolute;
+            inset: -1.5rem;
+            background-position: center;
+            background-size: cover;
+            filter: blur(20px) brightness(80%);
+            transform: scale(1.08);
         }
 
         &__image {
+            position: relative;
+            z-index: 1;
             display: block;
             width: 100%;
-            max-width: 20vw;
-            margin: auto 0;
+            height: 100%;
 
             :deep(img) {
                 display: block;
                 width: 100%;
-                height: auto;
+                height: 100%;
+                object-fit: contain;
             }
         }
 
@@ -98,15 +129,7 @@
         .portfolio__card {
             margin-bottom: 3.5vh;
 
-            &:first-of-type {
-                margin-left: inherit;
-            }
-
-            &:last-of-type {
-                margin-right: inherit;
-            }
-
-            &__image {
+            &__media {
                 max-width: 80vw;
             }
 

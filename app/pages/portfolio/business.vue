@@ -6,9 +6,10 @@ import PortfolioBanner from '~/components/Portfolio/PortfolioBanner.vue';
 <template>
     <main>
         <PortfolioBanner
-            image="birthday"
-            title="Invitaciones"
-            description="Creamos invitaciones únicas y cuidadas para celebrar tus cumpleaños y eventos especiales."
+            image="business"
+            format="png"
+            title="Carteles publicitarios"
+            description="Diseñamos carteles creativos que comunican tu mensaje y hacen destacar tu negocio."
         />
         <MailingForm />
     </main>

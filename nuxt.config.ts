@@ -6,6 +6,13 @@ export default defineNuxtConfig({
     },
 
     modules: ['@nuxt/image'],
+    runtimeConfig: {
+        smtpHost: '',
+        smtpPort: 465,
+        smtpUser: '',
+        smtpPassword: '',
+        smtpTo: ''
+    },
     image: {
         quality: 80,
         format: ['avif', 'webp'],
@@ -30,6 +37,9 @@ export default defineNuxtConfig({
 
     routeRules: {
         '/': { prerender: true },
-        '/portfolio/birthday': { prerender: true }
+        '/portfolio/birthday': { prerender: true },
+        '/portfolio/business': { prerender: true },
+        '/portfolio/restaurant': { prerender: true },
+        '/portfolio/menu': { prerender: true }
     }
 })
