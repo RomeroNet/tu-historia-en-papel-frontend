@@ -4,7 +4,8 @@ const currentYear = new Date().getFullYear();
 
 <template>
     <footer class="site-footer">
-        CreaHistoria Studio, {{ currentYear }}, todos los derechos reservados.
+        <span>CreaHistoria Studio, {{ currentYear }}.</span>
+        <span>Todos los derechos reservados.</span>
     </footer>
 </template>
 
@@ -17,6 +18,10 @@ const currentYear = new Date().getFullYear();
     color: white;
     background-color: vars.$brand-pink;
     text-align: center;
+
+    span {
+        display: block;
+    }
 }
 
 @media (max-width: vars.$mobile-width) {
