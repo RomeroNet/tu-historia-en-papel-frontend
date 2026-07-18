@@ -19,13 +19,13 @@
             />
         <div class="hero-banner__content">
             <h1 class="hero-banner__title">
-                <span class="hero-banner__label">¡Hola! Somos</span>
-                <span class="hero-banner__name font-handwritten">A&amp;P</span>
-                <span class="hero-banner__label">Diseñadores e ilustradores</span>
+                <span class="hero-banner__label">¡Hola! Soy</span>
+                <span class="hero-banner__name font-handwritten">Patricia</span>
+                <span class="hero-banner__label">Diseñadora e ilustradora</span>
             </h1>
 
             <span class="hero-banner__subtitle">
-                Nos encanta transformar ideas en diseños únicos y llenos de color.
+                Me encanta transformar ideas en diseños únicos y llenos de color.
             </span>
         </div>
     </div>
@@ -74,6 +74,8 @@
         display: flex;
         flex-direction: column;
         margin: 0 0 1.5em;
+        font-size: 1rem;
+        font-weight: 400;
     }
 
     &__label {
