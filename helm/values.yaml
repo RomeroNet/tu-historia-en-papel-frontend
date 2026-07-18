@@ -28,6 +28,7 @@ gateway:
   className: traefik
   hostname: creahistoriastudio.com
   aliases:
+    - www.creahistoriastudio.com
     - tuhistoriaenpapel.com
   clusterIssuer: letsencrypt-prod
   tlsSecretName: app-tls
