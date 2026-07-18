@@ -35,8 +35,8 @@
 </script>
 
 <template>
-    <h3>{{ title }}</h3>
     <div class="portfolio__card">
+        <h3 class="portfolio__card__title">{{ title }}</h3>
         <NuxtLink
             class="portfolio__card__media-link"
             :to="`/portfolio/${destination}`"
@@ -61,7 +61,6 @@
             </div>
         </NuxtLink>
         <div class="portfolio__card__content">
-            <h3>{{ title }}</h3>
             <span>{{ description }}</span>
         </div>
 
@@ -74,14 +73,6 @@
 <style scoped lang="scss">
     @use "~/assets/scss/vars.scss";
 
-    h3 {
-        display: none;
-        color: vars.$brand-pink;
-        text-transform: uppercase;
-        font-weight: 700;
-        text-align: center;
-    }
-
     .portfolio__card {
         display: flex;
         flex: 1 1 0;
@@ -89,10 +80,21 @@
         align-items: center;
         min-width: 0;
 
+        &__title {
+            display: flex;
+            min-height: 3em;
+            margin: 0 0 1rem;
+            align-items: center;
+            justify-content: center;
+            color: vars.$brand-pink;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
         &__media-link {
             display: block;
             width: 100%;
-            margin: auto 0;
 
             &:focus-visible {
                 outline: 3px solid vars.$brand-pink;
@@ -134,11 +136,15 @@
         }
 
         &__content {
-            h3 {
-                display: inherit;
-                color: vars.$brand-pink;
-                text-transform: uppercase;
-                font-weight: 700;
+            display: flex;
+            flex: 1 1 auto;
+            width: 100%;
+
+            span {
+                display: block;
+                max-width: 90%;
+                margin: 2.5vh auto 0;
+                text-align: center;
             }
         }
 
@@ -160,27 +166,20 @@
     }
 
     @media (max-width: vars.$mobile-width) {
-        h3 {
-            display: block;
-        }
-
         .portfolio__card {
             margin-bottom: 3.5vh;
+
+            &__title {
+                min-height: 0;
+            }
 
             &__media-link {
                 max-width: 80vw;
             }
 
             &__content {
-                h3 {
-                    display: none;
-                }
-
                 span {
-                    display: block;
                     max-width: 80%;
-                    margin: 2.5vh auto;
-                    text-align: center;
                 }
             }
         }
