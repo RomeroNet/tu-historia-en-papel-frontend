@@ -1,19 +1,20 @@
-{{- $hostnames := concat (list .Values.gateway.hostname) (.Values.gateway.aliases | default (list)) }}
+{{- $aliases := .Values.gateway.aliases | default (list) }}
+{{- if $aliases }}
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: {{ .Values.name }}-http
+  name: {{ .Values.name }}-canonical-redirect
   labels:
     app: {{ .Values.name }}
 spec:
   parentRefs:
-{{- range $index, $_ := $hostnames }}
+{{- range $index, $_ := $aliases }}
     - name: {{ $.Values.name }}
-      sectionName: http-{{ $index }}
+      sectionName: https-{{ add $index 1 }}
 {{- end }}
 
   hostnames:
-{{- range $hostnames }}
+{{- range $aliases }}
     - {{ . | quote }}
 {{- end }}
 
@@ -24,3 +25,4 @@ spec:
             scheme: https
             hostname: {{ .Values.gateway.hostname | quote }}
             statusCode: 301
+{{- end }}

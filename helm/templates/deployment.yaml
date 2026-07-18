@@ -25,6 +25,8 @@ spec:
               containerPort: 3000
               protocol: TCP
           env:
+            - name: NUXT_PUBLIC_SITE_URL
+              value: {{ .Values.siteUrl | quote }}
             - name: NUXT_SMTP_HOST
               valueFrom:
                 secretKeyRef:

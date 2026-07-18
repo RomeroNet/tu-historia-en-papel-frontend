@@ -19,6 +19,7 @@ env:
   USER: romeronet
   REPOSITORY: tu-historia-en-papel-frontend
   NAMESPACE: tu-historia-en-papel
+  NUXT_PUBLIC_SITE_URL: https://creahistoriastudio.com
 
 jobs:
   validate:
@@ -63,6 +64,8 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.REPOSITORY }}/node:latest
+          build-args: |
+            NUXT_PUBLIC_SITE_URL=${{ env.NUXT_PUBLIC_SITE_URL }}
           cache-from: type=gha,scope=production-arm64
           cache-to: type=gha,mode=max,scope=production-arm64
 
@@ -111,7 +114,9 @@ jobs:
       - name: Validate Kubernetes resources
         run: |
           helm template tu-historia-en-papel-frontend helm \
-            --set-string deploymentSha="${{ github.sha }}" > /tmp/application.yaml
+            --set-string deploymentSha="${{ github.sha }}" \
+            --set-string siteUrl="${{ env.NUXT_PUBLIC_SITE_URL }}" \
+            > /tmp/application.yaml
           kubectl apply --server-side --dry-run=server --force-conflicts -f /tmp/application.yaml
 
       - name: Deploy to Kubernetes
@@ -120,5 +125,6 @@ jobs:
             --namespace "${{ env.NAMESPACE }}" \
             tu-historia-en-papel-frontend helm \
             --set-string deploymentSha="${{ github.sha }}" \
+            --set-string siteUrl="${{ env.NUXT_PUBLIC_SITE_URL }}" \
             --wait \
             --timeout 5m

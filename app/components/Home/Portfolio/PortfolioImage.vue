@@ -1,15 +1,36 @@
 <script setup lang="ts">
-    defineProps({
-        image: String,
+    const props = defineProps({
+        image: {
+            type: String,
+            required: true
+        },
         format: {
             type: String,
             default: 'jpg'
         },
-        title: String,
-        description: String,
-        destination: String
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        },
+        destination: {
+            type: String,
+            required: true
+        }
     });
 
+    const source = computed(
+        () => `/images/portfolio/portfolio_${props.image}.${props.format}`
+    );
+    const image = useImage();
+    const backgroundImage = computed(() => `url("${image(source.value, {
+        width: 384,
+        format: 'webp',
+        quality: 80
+    })}")`);
 
 </script>
 
@@ -24,17 +45,18 @@
             <div class="portfolio__card__media">
                 <div
                     class="portfolio__card__background"
-                    :style="{ backgroundImage: `url(/images/portfolio/portfolio_${image}.${format})` }"
+                    :style="{ backgroundImage }"
                     aria-hidden="true"
                 />
                 <NuxtPicture
                     class="portfolio__card__image"
-                    :src="`/images/portfolio/portfolio_${image}.${format}`"
-                    format="avif,webp"
-                    legacy-format="png"
+                    :src="source"
+                    format="webp"
+                    :legacy-format="format"
+                    sizes="xs:80vw sm:30vw md:30vw lg:30vw xl:30vw"
+                    densities="1x"
                     alt=""
-                    preload
-                    loading="eager"
+                    loading="lazy"
                 />
             </div>
         </NuxtLink>

@@ -11,26 +11,29 @@ export default defineNuxtConfig({
         smtpPort: 465,
         smtpUser: '',
         smtpPassword: '',
-        smtpTo: ''
+        smtpTo: '',
+        public: {
+            siteUrl: 'https://creahistoriastudio.com'
+        }
     },
     image: {
         quality: 80,
-        format: ['avif', 'webp'],
+        format: ['webp'],
         screens: {
             xs: 360,
             sm: 640,
             md: 768,
             lg: 1024,
-            xl: 1280,
-            '2xl': 1536
+            xl: 1280
         }
     },
 
     css: [
         'normalize.css/normalize.css',
-        '@fontsource/nunito-sans/600.css',
-        '@fontsource/nunito-sans/700.css',
-        '@fontsource/caveat/400.css',
+        '@fontsource/nunito-sans/latin-400.css',
+        '@fontsource/nunito-sans/latin-600.css',
+        '@fontsource/nunito-sans/latin-700.css',
+        '@fontsource/caveat/latin-400.css',
 
         '~/assets/scss/main.scss',
     ],
@@ -40,6 +43,7 @@ export default defineNuxtConfig({
         '/portfolio/birthday': { prerender: true },
         '/portfolio/business': { prerender: true },
         '/portfolio/restaurant': { prerender: true },
-        '/portfolio/menu': { prerender: true }
+        '/portfolio/menu': { prerender: true },
+        '/sitemap.xml': { prerender: true }
     }
 })

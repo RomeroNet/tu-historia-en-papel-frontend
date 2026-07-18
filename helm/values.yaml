@@ -14,6 +14,8 @@ service:
 smtp:
   secretName: tu-historia-en-papel-frontend-smtp
 
+siteUrl: https://creahistoriastudio.com
+
 resources:
   requests:
     cpu: 25m
@@ -24,9 +26,8 @@ resources:
 
 gateway:
   className: traefik
-  hostname: tuhistoriaenpapel.com
-  hostnames:
+  hostname: creahistoriastudio.com
+  aliases:
     - tuhistoriaenpapel.com
-    - creahistoriastudio.com
   clusterIssuer: letsencrypt-prod
   tlsSecretName: app-tls
