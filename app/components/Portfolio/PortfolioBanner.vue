@@ -33,7 +33,7 @@
             :src="`/images/portfolio/portfolio_${image}.${format}`"
             format="webp"
             :legacy-format="format"
-            sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:1024px"
+            sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:1254px"
             densities="1x"
             alt=""
             preload

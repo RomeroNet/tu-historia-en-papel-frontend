@@ -11,7 +11,7 @@
             legacy-format="png"
             width="2172"
             height="724"
-            sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:100vw"
+            sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:100vw 2xl:100vw"
             densities="1x"
             alt=""
             preload

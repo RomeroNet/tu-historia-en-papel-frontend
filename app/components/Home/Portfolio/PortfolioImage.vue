@@ -53,8 +53,8 @@
                     :src="source"
                     format="webp"
                     :legacy-format="format"
-                    sizes="xs:80vw sm:30vw md:30vw lg:30vw xl:30vw"
-                    densities="1x"
+                    sizes="xs:80vw sm:30vw md:30vw lg:30vw xl:480px"
+                    densities="1x 2x"
                     alt=""
                     loading="lazy"
                 />
