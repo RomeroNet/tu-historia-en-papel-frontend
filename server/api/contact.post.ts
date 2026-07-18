@@ -14,6 +14,7 @@ interface RateLimitEntry {
 
 const RATE_LIMIT_WINDOW = 15 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_MAX_ENTRIES = 10_000;
 const rateLimits = new Map<string, RateLimitEntry>();
 
 const cleanText = (value: unknown, maxLength: number) => {
@@ -26,30 +27,41 @@ const cleanText = (value: unknown, maxLength: number) => {
 
 const checkRateLimit = (ip: string) => {
     const now = Date.now();
-
-    for (const [key, entry] of rateLimits) {
-        if (entry.resetAt <= now) {
-            rateLimits.delete(key);
-        }
-    }
-
     const entry = rateLimits.get(ip);
 
-    if (entry && entry.count >= RATE_LIMIT_MAX) {
+    if (entry?.resetAt && entry.resetAt <= now) {
+        rateLimits.delete(ip);
+    }
+
+    const activeEntry = rateLimits.get(ip);
+
+    if (activeEntry && activeEntry.count >= RATE_LIMIT_MAX) {
         throw createError({
             statusCode: 429,
-            statusMessage: 'Demasiados mensajes. Inténtalo de nuevo más tarde.'
+            statusMessage: 'Too Many Requests',
+            message: 'Demasiados mensajes. Inténtalo de nuevo más tarde.'
         });
     }
 
+    if (!activeEntry && rateLimits.size >= RATE_LIMIT_MAX_ENTRIES) {
+        const oldestIp = rateLimits.keys().next().value;
+
+        if (oldestIp) {
+            rateLimits.delete(oldestIp);
+        }
+    }
+
     rateLimits.set(ip, {
-        count: (entry?.count ?? 0) + 1,
-        resetAt: entry?.resetAt ?? now + RATE_LIMIT_WINDOW
+        count: (activeEntry?.count ?? 0) + 1,
+        resetAt: activeEntry?.resetAt ?? now + RATE_LIMIT_WINDOW
     });
 };
 
 export default defineEventHandler(async (event) => {
-    const body = await readBody<ContactBody>(event);
+    const rawBody = await readBody<unknown>(event);
+    const body = rawBody && typeof rawBody === 'object' && !Array.isArray(rawBody)
+        ? rawBody as ContactBody
+        : {};
     const website = cleanText(body.website, 200);
 
     if (website) {
@@ -63,26 +75,41 @@ export default defineEventHandler(async (event) => {
     if (!name || !email || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         throw createError({
             statusCode: 400,
-            statusMessage: 'Revisa los datos del formulario.'
+            statusMessage: 'Bad Request',
+            message: 'Revisa los datos del formulario.'
         });
     }
 
-    const ip = getRequestIP(event, { xForwardedFor: true }) ?? 'unknown';
-    checkRateLimit(ip);
+    const ip = getRequestIP(event, { xForwardedFor: true });
+
+    if (ip) {
+        checkRateLimit(ip);
+    }
 
     const config = useRuntimeConfig(event);
 
     if (!config.smtpHost || !config.smtpUser || !config.smtpPassword) {
         throw createError({
             statusCode: 500,
-            statusMessage: 'El servicio de correo no está configurado.'
+            statusMessage: 'Internal Server Error',
+            message: 'El servicio de correo no está configurado.'
+        });
+    }
+
+    const smtpPort = Number(config.smtpPort);
+
+    if (!Number.isInteger(smtpPort) || smtpPort < 1 || smtpPort > 65_535) {
+        throw createError({
+            statusCode: 500,
+            statusMessage: 'Internal Server Error',
+            message: 'El puerto SMTP no está configurado correctamente.'
         });
     }
 
     const transporter = nodemailer.createTransport({
         host: config.smtpHost,
-        port: Number(config.smtpPort),
-        secure: true,
+        port: smtpPort,
+        secure: smtpPort === 465,
         auth: {
             user: config.smtpUser,
             pass: config.smtpPassword
@@ -110,7 +137,8 @@ export default defineEventHandler(async (event) => {
 
         throw createError({
             statusCode: 502,
-            statusMessage: 'No se pudo enviar el mensaje.'
+            statusMessage: 'Bad Gateway',
+            message: 'No se pudo enviar el mensaje.'
         });
     }
 

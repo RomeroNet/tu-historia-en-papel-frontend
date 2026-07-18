@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    defineProps({
+    const props = defineProps({
         image: {
             type: String,
             required: true
@@ -17,6 +17,13 @@
             required: true
         }
     });
+
+    usePageSeo({
+        title: `${props.title} | CreaHistoria Studio`,
+        description: props.description,
+        image: `/images/portfolio/portfolio_${props.image}.${props.format}`,
+        imageAlt: `${props.title}: proyecto de CreaHistoria Studio`
+    });
 </script>
 
 <template>
@@ -24,8 +31,10 @@
         <NuxtPicture
             class="portfolio-banner__image"
             :src="`/images/portfolio/portfolio_${image}.${format}`"
-            format="avif,webp"
+            format="webp"
             :legacy-format="format"
+            sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:1024px"
+            densities="1x"
             alt=""
             preload
             loading="eager"

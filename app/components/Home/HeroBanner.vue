@@ -7,21 +7,26 @@
         <NuxtPicture
             class="hero-banner__media"
             src="/images/hero_banner_desktop.png"
-            format="avif,webp"
+            format="webp"
             legacy-format="png"
             width="2172"
             height="724"
-            sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:100vw 2xl:100vw"
+            sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:100vw"
+            densities="1x"
             alt=""
             preload
             loading="eager"
             />
         <div class="hero-banner__content">
-            <div class="hero-banner__title">
+            <h1 class="hero-banner__title">
                 <span class="hero-banner__label">¡Hola! Somos</span>
                 <span class="hero-banner__name font-handwritten">A&amp;P</span>
                 <span class="hero-banner__label">Diseñadores e ilustradores</span>
-            </div>
+            </h1>
+
+            <span class="hero-banner__subtitle">
+                Nos encanta transformar ideas en diseños únicos y llenos de color.
+            </span>
         </div>
     </div>
 </template>
@@ -68,17 +73,22 @@
     &__title {
         display: flex;
         flex-direction: column;
-        margin-bottom: 1.5em;
+        margin: 0 0 1.5em;
     }
 
     &__label {
         color: vars.$brand-pink;
         font-size: var(--hero-banner-label-size);
         font-weight: 700;
+        text-transform: uppercase;
     }
 
     &__name {
         font-size: calc(var(--hero-banner-label-size) + var(--hero-banner-name-extra-size));
+    }
+
+    &__subtitle {
+        white-space: nowrap;
     }
 
     @media (max-width: vars.$mobile-width) {
@@ -92,6 +102,11 @@
             text-align: center;
         }
 
+        &__subtitle {
+            width: 80%;
+            margin: 0 auto;
+            white-space: normal;
+        }
     }
 }
 </style>

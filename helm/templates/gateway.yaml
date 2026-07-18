@@ -1,4 +1,4 @@
-{{- $hostnames := .Values.gateway.hostnames | default (list .Values.gateway.hostname) }}
+{{- $hostnames := concat (list .Values.gateway.hostname) (.Values.gateway.aliases | default (list)) }}
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:

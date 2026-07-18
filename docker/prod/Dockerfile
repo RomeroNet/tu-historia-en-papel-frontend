@@ -5,6 +5,9 @@ RUN npm install --global corepack@latest \
 
 WORKDIR /app
 
+ARG NUXT_PUBLIC_SITE_URL=https://creahistoriastudio.com
+ENV NUXT_PUBLIC_SITE_URL=${NUXT_PUBLIC_SITE_URL}
+
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \

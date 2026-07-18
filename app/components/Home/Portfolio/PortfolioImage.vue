@@ -1,43 +1,71 @@
 <script setup lang="ts">
-    defineProps({
-        image: String,
+    const props = defineProps({
+        image: {
+            type: String,
+            required: true
+        },
         format: {
             type: String,
             default: 'jpg'
         },
-        title: String,
-        description: String,
-        destination: String
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        },
+        destination: {
+            type: String,
+            required: true
+        }
     });
 
+    const source = computed(
+        () => `/images/portfolio/portfolio_${props.image}.${props.format}`
+    );
+    const image = useImage();
+    const backgroundImage = computed(() => `url("${image(source.value, {
+        width: 384,
+        format: 'webp',
+        quality: 80
+    })}")`);
 
 </script>
 
 <template>
     <h3>{{ title }}</h3>
     <div class="portfolio__card">
-        <div class="portfolio__card__media">
-            <div
-                class="portfolio__card__background"
-                :style="{ backgroundImage: `url(/images/portfolio/portfolio_${image}.${format})` }"
-                aria-hidden="true"
-            />
-            <NuxtPicture
-                class="portfolio__card__image"
-                :src="`/images/portfolio/portfolio_${image}.${format}`"
-                format="avif,webp"
-                legacy-format="png"
-                alt=""
-                preload
-                loading="eager"
-            />
-        </div>
+        <NuxtLink
+            class="portfolio__card__media-link"
+            :to="`/portfolio/${destination}`"
+            :aria-label="`Ver ${title}`"
+        >
+            <div class="portfolio__card__media">
+                <div
+                    class="portfolio__card__background"
+                    :style="{ backgroundImage }"
+                    aria-hidden="true"
+                />
+                <NuxtPicture
+                    class="portfolio__card__image"
+                    :src="source"
+                    format="webp"
+                    :legacy-format="format"
+                    sizes="xs:80vw sm:30vw md:30vw lg:30vw xl:30vw"
+                    densities="1x"
+                    alt=""
+                    loading="lazy"
+                />
+            </div>
+        </NuxtLink>
         <div class="portfolio__card__content">
             <h3>{{ title }}</h3>
             <span>{{ description }}</span>
         </div>
 
-        <NuxtLink :to="`/portfolio/${destination}`">
+        <NuxtLink class="portfolio__card__button" :to="`/portfolio/${destination}`">
             <span>Ver más</span>
         </NuxtLink>
     </div>
@@ -61,12 +89,22 @@
         align-items: center;
         min-width: 0;
 
+        &__media-link {
+            display: block;
+            width: 100%;
+            margin: auto 0;
+
+            &:focus-visible {
+                outline: 3px solid vars.$brand-pink;
+                outline-offset: 3px;
+            }
+        }
+
         &__media {
             position: relative;
             display: block;
             width: 100%;
             aspect-ratio: 4 / 5;
-            margin: auto 0;
             overflow: hidden;
             background-color: rgb(245 245 245);
         }
@@ -104,7 +142,7 @@
             }
         }
 
-        & > a{
+        &__button {
             width: 60%;
             text-align: center;
             text-decoration: none;
@@ -129,7 +167,7 @@
         .portfolio__card {
             margin-bottom: 3.5vh;
 
-            &__media {
+            &__media-link {
                 max-width: 80vw;
             }
 

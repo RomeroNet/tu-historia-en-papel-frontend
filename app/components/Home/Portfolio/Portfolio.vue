@@ -246,14 +246,11 @@ onBeforeUnmount(() => {
 
             &__slide {
                 flex-basis: 100%;
+                scroll-snap-stop: always;
             }
 
             &__control {
-                width: 2rem;
-
-                span {
-                    font-size: 1.65rem;
-                }
+                display: none;
             }
         }
     }

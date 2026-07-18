@@ -1,75 +1,66 @@
-# Nuxt Minimal Starter
+# CreaHistoria Studio
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Sitio de portfolio y contacto de CreaHistoria Studio, construido con Nuxt 4 y Vue 3.
 
-## Setup
+## Requisitos
 
-Make sure to install dependencies:
+- Docker
+- Docker Compose
 
-```bash
-# npm
-npm install
+Los comandos del proyecto se ejecutan dentro del servicio `node`; no hace falta instalar Node.js ni pnpm en el host.
 
-# pnpm
-pnpm install
+## Desarrollo
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+Instala las dependencias exactas del lockfile:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+docker compose run --rm node pnpm install --frozen-lockfile
 ```
 
-## Production
-
-Build the application for production:
+Inicia el servidor en [http://localhost:3000](http://localhost:3000):
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+docker compose run --rm --service-ports node pnpm dev --host 0.0.0.0
 ```
 
-Locally preview production build:
+## Variables de entorno
+
+Copia `.env.example` a `.env` y configura las credenciales SMTP usadas por el formulario de contacto:
+
+- `NUXT_SMTP_HOST`
+- `NUXT_SMTP_USER`
+- `NUXT_SMTP_PASSWORD`
+- `NUXT_SMTP_TO`
+- `NUXT_PUBLIC_SITE_URL`
+
+`NUXT_SMTP_PORT` es opcional y usa `465` por defecto.
+
+## Validación
+
+Genera el build de producción:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+docker compose run --rm node pnpm build
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Sirve el build localmente:
+
+```bash
+docker compose run --rm --service-ports node pnpm preview --host 0.0.0.0
+```
+
+Valida el chart de Kubernetes:
+
+```bash
+helm lint --strict helm
+```
+
+## Estructura
+
+- `app/pages/`: rutas.
+- `app/components/`: componentes Vue.
+- `app/assets/scss/`: estilos globales y variables.
+- `server/api/`: endpoints Nitro.
+- `public/`: imágenes y archivos estáticos.
+- `docker/`: imágenes de desarrollo y producción.
+- `helm/`: despliegue en Kubernetes.

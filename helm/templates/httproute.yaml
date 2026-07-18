@@ -1,4 +1,3 @@
-{{- $hostnames := .Values.gateway.hostnames | default (list .Values.gateway.hostname) }}
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -7,15 +6,11 @@ metadata:
     app: {{ .Values.name }}
 spec:
   parentRefs:
-{{- range $index, $_ := $hostnames }}
     - name: {{ $.Values.name }}
-      sectionName: https-{{ $index }}
-{{- end }}
+      sectionName: https-0
 
   hostnames:
-{{- range $hostnames }}
-    - {{ . | quote }}
-{{- end }}
+    - {{ .Values.gateway.hostname | quote }}
 
   rules:
     - backendRefs:

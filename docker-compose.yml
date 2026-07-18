@@ -7,4 +7,11 @@ services:
       - ".:/app"
     ports:
       - "3000:3000"
+    environment:
+      NUXT_SMTP_HOST: "${NUXT_SMTP_HOST:-}"
+      NUXT_SMTP_PORT: "${NUXT_SMTP_PORT:-465}"
+      NUXT_SMTP_USER: "${NUXT_SMTP_USER:-}"
+      NUXT_SMTP_PASSWORD: "${NUXT_SMTP_PASSWORD:-}"
+      NUXT_SMTP_TO: "${NUXT_SMTP_TO:-}"
+      NUXT_PUBLIC_SITE_URL: "${NUXT_PUBLIC_SITE_URL:-https://creahistoriastudio.com}"
     user: "1000:1000"

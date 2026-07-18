@@ -1,6 +1,10 @@
 $font-family-handwritten: 'Caveat', cursive, system-ui;
 $font-family-subtitle: 'Nunito Sans', system-ui, sans-serif;
 
+body {
+    font-family: $font-family-subtitle;
+}
+
 a {
     &:visited,
     &:active {
