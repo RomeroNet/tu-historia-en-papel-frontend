@@ -66,7 +66,7 @@
         </div>
 
         <NuxtLink class="portfolio__card__button" :to="`/portfolio/${destination}`">
-            <span>Ver más</span>
+            <span>Más información</span>
         </NuxtLink>
     </div>
 </template>
