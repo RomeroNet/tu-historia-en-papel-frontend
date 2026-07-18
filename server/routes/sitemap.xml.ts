@@ -3,7 +3,8 @@ const routes = [
     '/portfolio/birthday',
     '/portfolio/business',
     '/portfolio/restaurant',
-    '/portfolio/menu'
+    '/portfolio/menu',
+    '/politica-de-privacidad'
 ];
 
 export default defineEventHandler((event) => {

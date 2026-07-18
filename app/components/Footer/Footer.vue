@@ -9,6 +9,9 @@ const currentYear = new Date().getFullYear();
     <footer class="site-footer">
         <span>CreaHistoria Studio, {{ currentYear }}.</span>
         <span>Todos los derechos reservados.</span>
+        <nav class="site-footer__legal" aria-label="Información legal">
+            <NuxtLink to="/politica-de-privacidad">Política de privacidad</NuxtLink>
+        </nav>
         <div class="site-footer__social-links">
             <WhatsAppLink />
             <InstagramLink />
@@ -36,6 +39,19 @@ const currentYear = new Date().getFullYear();
 
     &__social-links {
         display: none;
+    }
+
+    &__legal {
+        margin-top: 0.5rem;
+
+        a {
+            color: inherit;
+            text-underline-offset: 0.2em;
+
+            &:hover {
+                text-decoration-thickness: 2px;
+            }
+        }
     }
 }
 

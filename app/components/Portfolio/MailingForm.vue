@@ -91,6 +91,11 @@ const sendMail = async () => {
                 >
             </div>
 
+            <p class="mailing-form__privacy">
+                Puedes consultar nuestra política de privacidad
+                <NuxtLink to="/politica-de-privacidad">aquí</NuxtLink>.
+            </p>
+
             <button type="submit" :disabled="isSubmitting">
                 {{ isSubmitting ? 'Enviando…' : 'Enviar mensaje' }}
             </button>
@@ -202,6 +207,21 @@ const sendMail = async () => {
             color: rgb(180 35 35);
         }
     }
+
+    &__privacy {
+        grid-column: 1 / -1;
+        margin: 0;
+        color: rgb(80 80 80);
+        font-size: 0.875rem;
+        line-height: 1.5;
+        text-align: center;
+
+        a {
+            color: vars.$brand-pink;
+            font-weight: 600;
+            text-underline-offset: 0.15em;
+        }
+    }
 }
 
 @media (max-width: vars.$mobile-width) {
@@ -214,6 +234,7 @@ const sendMail = async () => {
 
         &__field--wide,
         button,
+        &__privacy,
         &__feedback {
             grid-column: 1;
         }

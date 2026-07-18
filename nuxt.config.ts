@@ -45,6 +45,7 @@ export default defineNuxtConfig({
         '/portfolio/business': { prerender: true },
         '/portfolio/restaurant': { prerender: true },
         '/portfolio/menu': { prerender: true },
+        '/politica-de-privacidad': { prerender: true },
         '/sitemap.xml': { prerender: true }
     }
 })
